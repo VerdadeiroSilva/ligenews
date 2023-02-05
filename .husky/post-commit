@@ -2,6 +2,7 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 npm run prod
+
 echo "Arquivos zipados em /dist"
 
 exec 1>&2
@@ -21,7 +22,7 @@ if [ $uploadAnswer = 'y' ]; then
     read uploadAPIKey
 
     # Fazer o curl
-    request="$(curl -X POST -F 'file=@/dist/ligenews-v0.0.1.zip' -H "Authorization: Ghost $uploadAPIKey" -H "Accept-Version: $version" https://{uploadURL}/ghost/api/admin/themes/upload)"
+    request="$(curl -X POST -F 'file=@./dist/ligenews-v0.0.1.zip' -H "Authorization: Ghost $uploadAPIKey" -H "Accept-Version: $version" https://{uploadURL}/ghost/api/admin/themes/upload)"
     $request
 
 elif [ $uploadAnswer = 'n' ]; then
