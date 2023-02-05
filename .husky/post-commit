@@ -13,16 +13,13 @@ read -p "Quer fazer upload da versão? (y/n)" uploadAnswer
 
 if [ $uploadAnswer = 'y' ]; then
     # Em qual site?
-    echo "Realizar upload em qual URL?"
-    read uploadURL
+    read -p "Realizar upload em qual URL?" uploadURL
 
     # Com qual Chave p/ API Admin?
-
-    echo "Qual sua chave para a API de Admin?"
-    read uploadAPIKey
+    read -p "Qual sua chave para a API de Admin?" uploadAPIKey
 
     # Fazer o curl
-    request="$(curl -X POST -F 'file=@./dist/ligenews-v0.0.1.zip' -H "Authorization: Ghost $uploadAPIKey" -H "Accept-Version: $version" https://{uploadURL}/ghost/api/admin/themes/upload)"
+    request="$(curl -X POST -F 'file=@./dist/ligenews-v0.0.1.zip' -H "Authorization: Ghost $uploadAPIKey" -H "Accept-Version: $version" https://{$uploadURL}/ghost/api/admin/themes/upload)"
     $request
 
 elif [ $uploadAnswer = 'n' ]; then
