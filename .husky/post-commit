@@ -10,7 +10,7 @@ exec < /dev/tty
 # Prompt 'Fazer upload'?
 read -p "Quer fazer upload da versão? (y/n)" uploadAnswer
 
-if [ $uploadAnswer == "y" ]; then
+if [ $uploadAnswer = 'y' ]; then
     # Em qual site?
     echo "Realizar upload em qual URL?"
     read uploadURL
@@ -24,7 +24,7 @@ if [ $uploadAnswer == "y" ]; then
     request=$(echo "-X POST -F 'file=@/dist/ligenews-v0.0.1.zip' -H "Authorization: Ghost $uploadAPIKey" -H "Accept-Version: $version" https://{uploadURL}/ghost/api/admin/themes/upload")
     $request
 
-elif [ $uploadAnswer == "n" ]; then
+elif [ $uploadAnswer = 'n' ]; then
     echo "Upload não realizado..."
 fi
 
