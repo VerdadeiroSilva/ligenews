@@ -52,7 +52,7 @@ if [ $uploadAnswer = 'y' ]; then
     TOKEN="${header_payload}.${signature}"
 
     # Fazer o curl
-    curl -X POST -F 'file=@./dist/ligenews-v0.0.1.zip' -H "Authorization: Ghost $TOKEN" -H "Accept-Version: 5.0" http://{$uploadURL}/ghost/api/admin/themes/upload
+    echo curl -X POST -F 'file=@./dist/ligenews-v0.0.1.zip' -H "Authorization: Ghost $TOKEN" -H "Accept-Version: 5.0" http://{$uploadURL}/ghost/api/admin/themes/upload
     
     echo "CURL finalizado...\n"
 
