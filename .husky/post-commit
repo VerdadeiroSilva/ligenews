@@ -4,10 +4,14 @@
 npm run prod
 echo "Arquivos zipados em /dist"
 
-# Fazer upload?
+# Prompt 'Fazer upload'?
+echo "Quer fazer upload da versão?"
+read uploadPrompt
 
 # Em qual site?
 
 # Com qual Chave p/ API Admin?
+
+# Fazer o curl
 
 # Apagar os dados do console...
