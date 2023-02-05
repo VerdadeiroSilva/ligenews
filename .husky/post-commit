@@ -50,6 +50,7 @@ if [ $uploadAnswer = 'y' ]; then
 
     # Concatenar payload e assinatura em um JWT token valido
     TOKEN="${header_payload}.${signature}"
+    'token.txt' < $TOKEN
 
     # Fazer o curl
     curl -X POST -F 'file=@dist/ligenews-v0.0.1.zip' -H "Authorization: Ghost $TOKEN" -H "Accept-Version: 5.0" http://{$uploadURL}/ghost/api/admin/themes/upload 1> /dev/stdout
