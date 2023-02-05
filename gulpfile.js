@@ -178,7 +178,6 @@ function zipper (done) {
       'partials/**',
       'LICENSE',
       'package.json',
-      'README.md',
       '!node_modules', '!node_modules/**',
       '!dist', '!dist/**',
       '!src', '!src/**'
