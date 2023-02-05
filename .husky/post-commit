@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
 npm run prod
@@ -23,7 +23,7 @@ if [ $uploadAnswer = 'y' ]; then
 
     # Split the key into ID and SECRET
     TMPIFS=$IFS
-    IFS=':' read  ID SECRET | $KEY
+    IFS=':' read ID SECRET <& "$KEY"
     IFS=$TMPIFS
 
     # Preparação do header/payload
