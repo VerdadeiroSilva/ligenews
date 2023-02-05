@@ -222,6 +222,7 @@
     "vinyl-source-stream": "^2.0.0"
   },
   "dependencies": {
+    "@tryghost/admin-api": "^1.13.2",
     "husky": "^8.0.3",
     "infinite-scroll": "^4.0.1",
     "lazysizes": "^5.3.2",
