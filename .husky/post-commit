@@ -3,3 +3,11 @@
 
 npm run prod
 echo "Arquivos zipados em /dist"
+
+# Fazer upload?
+
+# Em qual site?
+
+# Com qual Chave p/ API Admin?
+
+# Apagar os dados do console...
