@@ -13,15 +13,45 @@ read -p "Quer fazer upload da versão? (y/n)" uploadAnswer
 
 if [ $uploadAnswer = 'y' ]; then
     # Em qual site?
-    read -p "Realizar upload em qual URL?" uploadURL
+    read -p "Realizar upload em qual URL?\n" uploadURL
 
     # Com qual Chave p/ API Admin?
-    read -p "Qual sua chave para a API de Admin?" uploadAPIKey
+    read -p "Qual sua chave para a API de Admin?\n" uploadAPIKey
+
+    # Split nas chaves, em ID e SECRET
+    TMPIFS=$IFS
+    IFS=':' read ID SECRET <<< "$uploadAPIKey"
+    IFS=$TMPIFS
+
+    # Preparação do header/payload
+    NOW=$(date +'%s')
+    FIVE_MINS=$(($NOW + 300))
+    HEADER="{\"alg\": \"HS256\",\"typ\": \"JWT\", \"kid\": \"$ID\"}"
+    PAYLOAD="{\"iat\":$NOW,\"exp\":$FIVE_MINS,\"aud\": \"/admin/\"}"
+
+    # Função helper para encodar em base64
+    base64_url_encode() {
+        declare input=${1:-$(</dev/stdin)}
+        # Use `tr` to URL encode the output from base64.
+        printf '%s' "${input}" | base64 | tr -d '=' | tr '+' '-' | tr '/' '_'
+    }
+
+    # Preparação do body do token
+    header_base64=$(base64_url_encode "$HEADER")
+    payload_base64=$(base64_url_encode "$PAYLOAD")
+
+    header_payload="${header_base64}.${payload_base64}"
+
+    # Criar a assinatura
+    signature=$(printf '%s' "${header_payload}" | openssl dgst -binary -sha256 -mac HMAC -macopt hexkey:$SECRET | base64_url_encode)
+
+    # Concatenar payload e assinatura em um JWT token valido
+    TOKEN="${header_payload}.${signature}"
 
     # Fazer o curl
-    curl -X POST -F 'file=@./dist/ligenews-v0.0.1.zip' -H "Authorization: Ghost $uploadAPIKey" -H "Accept-Version: 5.0" http://{$uploadURL}/ghost/api/admin/themes/upload
+    curl -X POST -F 'file=@./dist/ligenews-v0.0.1.zip' -H "Authorization: Ghost $TOKEN" -H "Accept-Version: 5.0" http://{$uploadURL}/ghost/api/admin/themes/upload
     
-    echo "CURL finalizado..."
+    echo "CURL finalizado...\n"
 
 elif [ $uploadAnswer = 'n' ]; then
     echo "Upload não realizado..."
