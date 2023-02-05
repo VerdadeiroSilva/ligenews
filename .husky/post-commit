@@ -19,11 +19,11 @@ if [ $uploadAnswer = 'y' ]; then
     read -p "Qual sua chave para a API de Admin?\n" uploadAPIKey
 
     # Admin API key goes here
-    KEY=$uploadAPIKey
+    $uploadAPIKey > api.txt
 
     # Split the key into ID and SECRET
     TMPIFS=$IFS
-    IFS=':' read ID SECRET <& "$KEY"
+    IFS=':' read ID SECRET < "api.txt"
     IFS=$TMPIFS
 
     # Preparação do header/payload
