@@ -8,13 +8,26 @@ exec 1>&2
 exec < /dev/tty
 
 # Prompt 'Fazer upload'?
-echo "Quer fazer upload da versão?"
-read uploadPrompt
+echo "Quer fazer upload da versão? (y/n)"
+read uploadAnswer
 
-# Em qual site?
+if [[ $uploadAnswer == "y" ]]; then 
+    # Em qual site?
 
-# Com qual Chave p/ API Admin?
+    echo "Realizar upload em qual URL?"
+    read uploadURL
 
-# Fazer o curl
+    # Com qual Chave p/ API Admin?
+
+    echo "Qual sua chave para a API de Admin?"
+    read uploadAPIKey
+
+    # Fazer o curl
+    request=$(echo "-X POST -F 'file=@/dist/ligenews-v0.0.1.zip' -H "Authorization: Ghost $uploadAPIKey" -H "Accept-Version: $version" https://{uploadURL}/ghost/api/admin/themes/upload")
+    $request
+
+elif [[$uploadAnswer == "n"]] ; then
+    echo "Upload não realizado..."
+fi
 
 # Apagar os dados do console...
