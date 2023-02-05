@@ -52,12 +52,14 @@ if [ $uploadAnswer = 'y' ]; then
     TOKEN="${header_payload}.${signature}"
 
     # Fazer o curl
-    curl -X POST -F 'file=@./dist/testinhozip' -H "Authorization: Ghost $TOKEN" -H "Accept-Version: 5.0" http://{$uploadURL}/ghost/api/admin/themes/upload > /dev/tty
+    curl -X POST -F 'file=@./dist/ligenews-0.0.1.zip' -H "Authorization: Ghost $TOKEN" -H "Accept-Version: 5.0" http://{$uploadURL}/ghost/api/admin/themes/upload 1> /dev/stdout
     
     echo "CURL finalizado...\n"
+    
 
 elif [ $uploadAnswer = 'n' ]; then
     echo "Upload não realizado..."
 fi
 
 # Apagar os dados do console...
+rm -f ./api.txt
