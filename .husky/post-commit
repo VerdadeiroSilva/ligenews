@@ -16,7 +16,7 @@ if [ $uploadAnswer = 'y' ]; then
     read -p "Realizar upload em qual URL?\n" uploadURL
 
     # Com qual Chave p/ API Admin?
-    read -p "Qual sua chave para a API de Admin?\n" uploadAPIKey
+    read -p "Qual sua chave para a API de Admin? '\n' " uploadAPIKey
 
     # Admin API key goes here
     echo $uploadAPIKey > api.txt
