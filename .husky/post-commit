@@ -19,8 +19,8 @@ if [ $uploadAnswer = 'y' ]; then
     read -p "Qual sua chave para a API de Admin?" uploadAPIKey
 
     # Fazer o curl
-    request="$(curl -X POST -F 'file=@./dist/ligenews-v0.0.1.zip' -H "Authorization: Ghost $uploadAPIKey" -H "Accept-Version: 5.0" http://{$uploadURL}/ghost/api/admin/themes/upload)"
-    $request
+    curl -X POST -F 'file=@./dist/ligenews-v0.0.1.zip' -H "Authorization: Ghost $uploadAPIKey" -H "Accept-Version: 5.0" http://{$uploadURL}/ghost/api/admin/themes/upload
+    
 
 elif [ $uploadAnswer = 'n' ]; then
     echo "Upload não realizado..."
