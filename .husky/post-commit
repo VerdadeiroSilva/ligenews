@@ -4,6 +4,9 @@
 npm run prod
 echo "Arquivos zipados em /dist"
 
+exec 1>&2
+exec < /dev/tty
+
 # Prompt 'Fazer upload'?
 echo "Quer fazer upload da versão?"
 read uploadPrompt
