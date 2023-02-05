@@ -21,6 +21,7 @@ if [ $uploadAnswer = 'y' ]; then
     # Fazer o curl
     curl -X POST -F 'file=@./dist/ligenews-v0.0.1.zip' -H "Authorization: Ghost $uploadAPIKey" -H "Accept-Version: 5.0" http://{$uploadURL}/ghost/api/admin/themes/upload
     
+    echo "CURL finalizado..."
 
 elif [ $uploadAnswer = 'n' ]; then
     echo "Upload não realizado..."
