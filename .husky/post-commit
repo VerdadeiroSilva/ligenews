@@ -34,7 +34,7 @@ if [ $uploadAnswer = 'y' ]; then
 
     # Função helper para encodar em base64
     base64_url_encode() {
-        declare input=${1:-$(</dev/stdin)}
+        input=${1:-$(</dev/stdin)}
         # Use `tr` to URL encode the output from base64.
         printf '%s' "${input}" | base64 | tr -d '=' | tr '+' '-' | tr '/' '_'
     }
